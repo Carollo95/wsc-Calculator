@@ -1,0 +1,13 @@
+openapi: 3.0.3
+info:
+  title: Placeholder
+  version: 0.0.1
+servers:
+  - url: https://placeholder
+paths:
+  /test:
+    get:
+      operationId: placeholder
+      responses:
+        '200':
+          description: Successful operation

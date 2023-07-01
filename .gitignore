@@ -24,3 +24,6 @@ buildNumber.properties
 
 ## Flattened pom ##
 .flattened-pom.xml
+
+## OpenApiGenerator ##
+code/.openapi-generator

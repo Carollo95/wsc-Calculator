@@ -26,8 +26,11 @@ java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar
 # Design overview
 
 # Dependencies
+* **httpclient5**: apache library for http client functionalities required for the generated code for the api 
+* **openapi-generator-maven-plugin**: Plugin chosen to create the rest api code from the OpenApi specification
 * **spring-boot-starter-web**: Spring starter for web applications
 * **spring-boot-devtools**: Spring devtools to speed up development
 * **spring-boot-starter-test**: Spring starter for testing
 
 # Functional documentation
+Swagger Url http://localhost:8080/calculator/api/v1/swagger-ui/index.html

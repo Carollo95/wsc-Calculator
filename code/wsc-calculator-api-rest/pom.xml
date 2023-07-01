@@ -10,37 +10,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wsc-calculator-boot</artifactId>
-    <name>wsc Calculator boot</name>
-    <description>Boot module for the wsc-Calculator. Contains the configuration and the main</description>
+    <artifactId>wsc-calculator-api-rest</artifactId>
+    <name>wsc Calculator api rest</name>
+    <description>Module that contains the rest api</description>
 
     <dependencies>
-        <!-- Modules -->
         <dependency>
-            <groupId>com.github.carollo95</groupId>
-            <artifactId>wsc-calculator-api-rest</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
-        <!-- Spring -->
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

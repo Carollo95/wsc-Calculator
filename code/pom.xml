@@ -3,7 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
+
     <modules>
+        <module>wsc-calculator-api-rest</module>
         <module>wsc-calculator-boot</module>
     </modules>
 
@@ -22,13 +24,16 @@
 
     <properties>
         <revision>0.0.1-SNAPSHOT</revision>
+
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-
         <!-- Dependency versions -->
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+        <httpclient5.version>5.2.1</httpclient5.version>
+        <openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.0.0</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <dependencyManagement>
@@ -37,8 +42,24 @@
             <dependency>
                 <groupId>com.github.carollo95</groupId>
                 <artifactId>wsc-calculator-boot</artifactId>
+                <version>${project.parent.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.carollo95</groupId>
+                <artifactId>wsc-calculator-api-rest</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <!-- api docs -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>${httpclient5.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -62,6 +83,51 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>${openapi-generator-maven-plugin.version}</version>
+                    <executions>
+                        <!-- OWN API-->
+                        <execution>
+                            <id>api-generate</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <inputSpec>${project.basedir}/src/main/resources/spec/openapi.yml</inputSpec>
+                                <generatorName>spring</generatorName>
+                                <output>..</output>
+                                <configOptions>
+                                    <sourceFolder>src/main/java</sourceFolder>
+                                    <interfaceOnly>true</interfaceOnly>
+                                    <sourceFolder>${project.artifactId}/target/generated-sources</sourceFolder>
+                                    <useTags>true</useTags>
+                                    <library>spring-boot</library>
+                                    <oas3>true</oas3>
+                                    <useSpringController>true</useSpringController>
+                                    <useSpringfox>false</useSpringfox>
+                                    <documentationProvider>springdoc</documentationProvider>
+                                    <useSpringBoot3>true</useSpringBoot3>
+                                </configOptions>
+                                <modelPackage>com.github.carollo95.wsccalculator.restdto</modelPackage>
+                                <apiPackage>com.github.carollo95.wsccalculator.controller</apiPackage>
+                                <generateApiDocumentation>false</generateApiDocumentation>
+                                <generateModelDocumentation>false</generateModelDocumentation>
+                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                                <skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+                                <typeMappings>
+                                    <typeMapping>Double=java.math.BigDecimal</typeMapping>
+                                </typeMappings>
+                                <modelNameSuffix>RestDTO</modelNameSuffix>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
