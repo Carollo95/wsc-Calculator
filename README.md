@@ -19,7 +19,7 @@ mvn clean install --file code/
 Once the project is compiled, run the command:
 
 ```
-java -jar code/target/wsc-Calculator-0.0.1-SNAPSHOT.jar 
+java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar 
 ```
 
 

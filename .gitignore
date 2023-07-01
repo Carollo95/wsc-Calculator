@@ -16,5 +16,11 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-# Intellij
+### IntelliJ IDEA ###
 .idea
+*.iws
+*.iml
+*.ipr
+
+## Flattened pom ##
+.flattened-pom.xml
