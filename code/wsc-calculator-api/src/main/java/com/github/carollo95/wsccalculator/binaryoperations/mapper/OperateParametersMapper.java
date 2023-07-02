@@ -1,0 +1,17 @@
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
+
+package com.github.carollo95.wsccalculator.binaryoperations.mapper;
+
+import com.github.carollo95.wsccalculator.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.binaryoperations.dto.OperateParametersDTO;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface OperateParametersMapper {
+
+    OperateParametersBean dtoToBean(OperateParametersDTO dto);
+
+}

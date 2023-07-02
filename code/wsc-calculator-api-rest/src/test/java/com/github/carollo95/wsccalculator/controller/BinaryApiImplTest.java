@@ -5,10 +5,10 @@
 
 package com.github.carollo95.wsccalculator.controller;
 
-import com.github.carollo95.wsccalculator.dto.OperateParametersDTO;
+import com.github.carollo95.wsccalculator.binaryoperations.dto.OperateParametersDTO;
 import com.github.carollo95.wsccalculator.mapper.OperateParametersRestMapper;
 import com.github.carollo95.wsccalculator.restdto.OperateParametersRestDTO;
-import com.github.carollo95.wsccalculator.service.BinaryOperationsService;
+import com.github.carollo95.wsccalculator.binaryoperations.service.BinaryOperationsService;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

@@ -3,7 +3,12 @@
  *  See file LICENSE file for full license details.
  */
 
-package com.github.carollo95.wsccalculator.dto;
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
+
+package com.github.carollo95.wsccalculator.binaryoperations.dto;
 
 
 import com.github.carollo95.wsccalculator.enums.OPERATOR;

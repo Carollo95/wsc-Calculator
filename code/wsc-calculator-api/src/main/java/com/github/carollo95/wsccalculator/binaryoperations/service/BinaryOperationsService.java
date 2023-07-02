@@ -3,9 +3,14 @@
  *  See file LICENSE file for full license details.
  */
 
-package com.github.carollo95.wsccalculator.service;
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
 
-import com.github.carollo95.wsccalculator.dto.OperateParametersDTO;
+package com.github.carollo95.wsccalculator.binaryoperations.service;
+
+import com.github.carollo95.wsccalculator.binaryoperations.dto.OperateParametersDTO;
 
 import java.math.BigDecimal;
 
