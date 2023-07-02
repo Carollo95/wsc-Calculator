@@ -43,7 +43,7 @@ public class ControllerExceptionHandler {
             HttpMediaTypeNotSupportedException.class
     })
     private static ResponseEntity<String> httpMediaTypeNotSupportedException(final Exception e) {
-        return ResponseEntity.badRequest().body(ExceptionUtils.getRootCause(e).getMessage());
+        return ResponseEntity.badRequest().body("The parameters are not valid");
     }
 
     /**
