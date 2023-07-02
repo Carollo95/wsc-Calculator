@@ -3,7 +3,12 @@
  *  See file LICENSE file for full license details.
  */
 
-package com.github.carollo95.wsccalculator.controller;
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
+
+package com.github.carollo95.wsccalculator.advices;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
