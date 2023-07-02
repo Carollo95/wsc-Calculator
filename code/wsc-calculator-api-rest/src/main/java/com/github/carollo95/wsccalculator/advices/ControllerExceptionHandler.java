@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -26,6 +29,21 @@ public class ControllerExceptionHandler {
 
     private ControllerExceptionHandler() {
         //Not instantiable
+    }
+
+    /**
+     * Handler for the bad requests
+     *
+     * @param e the exception
+     * @return the response with the exception message
+     */
+    @ExceptionHandler({
+            HttpMessageNotReadableException.class,
+            MethodArgumentNotValidException.class,
+            HttpMediaTypeNotSupportedException.class
+    })
+    private static ResponseEntity<String> httpMediaTypeNotSupportedException(final Exception e) {
+        return ResponseEntity.badRequest().body(ExceptionUtils.getRootCause(e).getMessage());
     }
 
     /**

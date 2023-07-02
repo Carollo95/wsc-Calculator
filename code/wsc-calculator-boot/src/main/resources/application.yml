@@ -5,4 +5,4 @@ server:
 logging:
   level:
     com.github.carollo95.wsccalculator: DEBUG
-    org.springframework.web: ERROR
+    org.springframework.web: DEBUG
