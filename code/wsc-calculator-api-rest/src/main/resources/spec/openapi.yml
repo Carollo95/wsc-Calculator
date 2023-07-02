@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: calculator - OpenAPI 3.0
+  description: |-
+    Collection of arithmetic operations
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: pcarollofernandez@gmail.com
+  license:
+    name: GNU General Public license 3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  version: 0.1.0
+servers:
+  - url: https://localhost:8080/calculator/api/v1
+tags:
+  - name: Binary
+    description: Collection of binary operations
+paths:
+  /operate:
+    post:
+      tags:
+        - Binary
+      summary: Performs the selected operation on the given arguments
+      description: Performs the selected operation on the given arguments
+      operationId: operateBinary
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperateParameters'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                format: double
+                type: number
+              examples:
+                resultExample:
+                  value: '53.46'
+        '400':
+          description: Invalid parameters
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    OperateParameters:
+      description: the parameters to perform an operation
+      required:
+        - operator
+        - operands
+      type: object
+      properties:
+        operator:
+          description: the operator to use
+          type: string
+          enum:
+            - sum
+          example: "sum"
+        operands:
+          description: The operands to operate
+          type: array
+          items:
+            format: double
+            type: number
+          minItems: 2
+          maxItems: 2
+          example: "[10.21, 55.4]"
