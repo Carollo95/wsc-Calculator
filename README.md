@@ -24,6 +24,13 @@ java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar
 
 
 # Design overview
+## Module architecture diagram
+![ModuleArchitectureDiagram](docs/ModuleArchitectureDiagram.png)
+
+* **wsc-calculator-boot**: module with the `main` and all the configuration files and classes
+* **wsc-calculator-api-rest**: module with the classes related to the rest implementation of the service
+* **wsc-calculator-api**: module with the exposed services decoupled from the implementation. Several modules, each with its own implementation could consume it.
+* **wsc-calculator-business**: module with the business logic.
 
 # Dependencies
 * **httpclient5**: apache library for http client functionalities required for the generated code for the api
