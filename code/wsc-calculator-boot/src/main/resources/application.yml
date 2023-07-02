@@ -1,1 +1,8 @@
+server:
+  servlet:
+    context-path: "/calculator/api/v1"
 
+logging:
+  level:
+    com.github.carollo95.wsccalculator: DEBUG
+    org.springframework.web: DEBUG
