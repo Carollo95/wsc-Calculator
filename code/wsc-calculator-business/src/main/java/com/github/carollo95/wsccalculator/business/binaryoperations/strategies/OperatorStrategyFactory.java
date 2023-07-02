@@ -6,17 +6,15 @@
 package com.github.carollo95.wsccalculator.business.binaryoperations.strategies;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
+import org.springframework.stereotype.Component;
 
-import static com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR.SUM;
+import java.util.Objects;
 
 /**
  * Factory for retrieving the correct strategy for an operation.
  */
+@Component
 public class OperatorStrategyFactory {
-
-    private OperatorStrategyFactory() {
-        //Not implemented
-    }
 
     /**
      * Returns the correct strategy for the operation
@@ -24,7 +22,9 @@ public class OperatorStrategyFactory {
      * @param operator the operator
      * @return the strategy to operate
      */
-    public static OperatorStrategy getStrategy(OPERATOR operator) {
+    public OperatorStrategy getStrategy(OPERATOR operator) {
+        Objects.requireNonNull(operator, "The operator can not be null");
+
         OperatorStrategy result;
         switch (operator) {
             case SUM -> result = new SumOperatorStrategy();

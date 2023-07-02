@@ -8,6 +8,7 @@ package com.github.carollo95.wsccalculator.business.binaryoperations;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -19,13 +20,16 @@ import java.util.Objects;
 @Component
 public class BinaryOperationBusinessImpl implements BinaryOperationBusiness {
 
+    @Autowired
+    private OperatorStrategyFactory operatorStrategyFactory;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public BigDecimal operateBinary(final OperateParametersBean operateParameters) {
         validateInputParams(operateParameters);
-        final OperatorStrategy operatorStrategy = OperatorStrategyFactory.getStrategy(operateParameters.getOperator());
+        final OperatorStrategy operatorStrategy = this.operatorStrategyFactory.getStrategy(operateParameters.getOperator());
         return operatorStrategy.operate(operateParameters.getOperands());
     }
 
