@@ -6,9 +6,12 @@
 package com.github.carollo95.wsccalculator.business.binaryoperations;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
+import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Implementation of {@link BinaryOperationBusiness}
@@ -20,8 +23,15 @@ public class BinaryOperationBusinessImpl implements BinaryOperationBusiness {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal operateBinary(OperateParametersBean operateParameters) {
-        return null;
+    public BigDecimal operateBinary(final OperateParametersBean operateParameters) {
+        validateInputParams(operateParameters);
+        final OperatorStrategy operatorStrategy = OperatorStrategyFactory.getStrategy(operateParameters.getOperator());
+        return operatorStrategy.operate(operateParameters.getOperands());
+    }
+
+    private static void validateInputParams(final OperateParametersBean operateParameters) {
+        Objects.requireNonNull(operateParameters, "The parameters can not be null");
+        Objects.requireNonNull(operateParameters, "The operator can not be null");
     }
 
 }
