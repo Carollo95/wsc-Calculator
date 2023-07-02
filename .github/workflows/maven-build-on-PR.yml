@@ -1,0 +1,10 @@
+name: Build on PR
+
+on:
+  pull_request:
+    branches: [ "develop", "main" ]
+
+jobs:
+  build-on-PR:
+    uses: Carollo95/github-workflows/.github/workflows/maven-build.yml@main
+    secrets: inherit

@@ -1,0 +1,10 @@
+name: Enforce consolidated dependencies on PR to main
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  enforce-consolidated-dependencies:
+    uses: Carollo95/github-workflows/.github/workflows/maven-enforce-consolidated-dependencies.yml@main
+    secrets: inherit
