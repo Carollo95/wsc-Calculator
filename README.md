@@ -22,7 +22,6 @@ Once the project is compiled, run the command:
 java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar 
 ```
 
-
 # Design overview
 ## Module architecture diagram
 ![ModuleArchitectureDiagram](docs/ModuleArchitectureDiagram.png)
@@ -32,7 +31,11 @@ java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar
 * **wsc-calculator-api**: module with the exposed services decoupled from the implementation. Several modules, each with its own implementation could consume it.
 * **wsc-calculator-business**: module with the business logic.
 
-# Dependencies
+## Design choices
+* The operate endpoints receives the operator and a list of operands. Initially limited to 2, but could in the future receive more operands if needed without breaking the api.
+* The use of the strategy pattern on the business layer allows to add more implementations for new operations without the need of great modifications
+
+## Dependencies
 * **httpclient5**: apache library for http client functionalities required for the generated code for the api
 * **jackson-databind-nullable**: wrapper that allows the distinction between null and "null" on the rest implementation
 * **lombok**: library that provides annotations to reduce boilerplate code
@@ -49,10 +52,8 @@ Swagger Url http://localhost:8080/calculator/api/v1/swagger-ui/index.html
 ## Operate endpoint:
 
 **/calculator/api/v1/operate:**
-
-Receives the operator and a list of operands. Initially limited to 2, but could in the future receive more operands if needed without breaking the api.
-
 Example:
 ```
 curl -X POST http://localhost:8080/calculator/api/v1/operate -H "accept: application/json" -H "Content-Type: application/json"  -d "{""operator"": ""sum"", ""operands"": [10.21, 55.4 ]}"
 ```
+ 
