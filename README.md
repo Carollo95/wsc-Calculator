@@ -35,6 +35,7 @@ java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.0.1-SNAPSHOT.jar
 # Dependencies
 * **httpclient5**: apache library for http client functionalities required for the generated code for the api
 * **jackson-databind-nullable**: wrapper that allows the distinction between null and "null" on the rest implementation
+* **lombok**: library that provides annotations to reduce boilerplate code
 * **openapi-generator-maven-plugin**: Plugin chosen to create the rest api code from the OpenApi specification
 * **spring-boot-starter-web**: Spring starter for web applications
 * **spring-boot-devtools**: Spring devtools to speed up development
