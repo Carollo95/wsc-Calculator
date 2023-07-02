@@ -8,9 +8,14 @@
  *  See file LICENSE file for full license details.
  */
 
-package com.github.carollo95.wsccalculator.binaryoperations.service;
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
 
-import com.github.carollo95.wsccalculator.binaryoperations.dto.OperateParametersDTO;
+package com.github.carollo95.wsccalculator.api.binaryoperations.service;
+
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
 
 import java.math.BigDecimal;
 

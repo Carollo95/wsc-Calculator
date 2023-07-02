@@ -5,8 +5,8 @@
 
 package com.github.carollo95.wsccalculator.mapper;
 
-import com.github.carollo95.wsccalculator.binaryoperations.dto.OperateParametersDTO;
-import com.github.carollo95.wsccalculator.enums.OPERATOR;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
+import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import com.github.carollo95.wsccalculator.restdto.OperateParametersRestDTO;
 import org.mapstruct.Mapper;
 

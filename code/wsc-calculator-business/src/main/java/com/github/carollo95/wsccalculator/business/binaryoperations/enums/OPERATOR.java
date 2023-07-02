@@ -3,7 +3,12 @@
  *  See file LICENSE file for full license details.
  */
 
-package com.github.carollo95.wsccalculator.enums;
+/*
+ *  This file is part of wsc-Calculator.
+ *  See file LICENSE file for full license details.
+ */
+
+package com.github.carollo95.wsccalculator.business.binaryoperations.enums;
 
 
 import lombok.Getter;
