@@ -10,15 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wsc-calculator-api</artifactId>
-    <name>wsc Calculator api</name>
-    <description>Module that contains the api independently of the implementation</description>
+    <artifactId>wsc-calculator-business</artifactId>
+    <name>wsc Calculator business</name>
+    <description>Module that contains the business logic of the application</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.github.carollo95</groupId>
-            <artifactId>wsc-calculator-business</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

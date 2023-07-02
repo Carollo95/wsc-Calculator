@@ -20,6 +20,14 @@
             <groupId>com.github.carollo95</groupId>
             <artifactId>wsc-calculator-api-rest</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.carollo95</groupId>
+            <artifactId>wsc-calculator-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.carollo95</groupId>
+            <artifactId>wsc-calculator-business</artifactId>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
