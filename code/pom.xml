@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>wsc-calculator-api</module>
         <module>wsc-calculator-api-rest</module>
         <module>wsc-calculator-boot</module>
     </modules>
@@ -48,6 +49,11 @@
             <dependency>
                 <groupId>com.github.carollo95</groupId>
                 <artifactId>wsc-calculator-api-rest</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.carollo95</groupId>
+                <artifactId>wsc-calculator-api</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
             <!-- api docs -->
