@@ -39,6 +39,13 @@ class OperatorStrategyFactoryTest {
             Class<? extends OperatorStrategy> strategyClass = strategy.getClass();
             assertEquals(SumOperatorStrategy.class, strategyClass);
         }
+
+        @Test
+        void when_SUBTRACT_then_TheSubtractStrategy() {
+            OperatorStrategy strategy = target.getStrategy(OPERATOR.SUBTRACT);
+            Class<? extends OperatorStrategy> strategyClass = strategy.getClass();
+            assertEquals(SubtractOperatorStrategy.class, strategyClass);
+        }
     }
 
 }

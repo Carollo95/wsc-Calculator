@@ -19,7 +19,8 @@ import lombok.Getter;
 @Getter
 public enum OPERATOR {
     UNDEFINED("undefined"),
-    SUM("sum");
+    SUM("sum"),
+    SUBTRACT("subtract");
 
     private final String value;
 
