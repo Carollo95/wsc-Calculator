@@ -27,3 +27,6 @@ buildNumber.properties
 
 ## OpenApiGenerator ##
 code/.openapi-generator
+
+## Compiled artifact
+*wsc-calculator.jar
