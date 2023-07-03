@@ -19,7 +19,7 @@ mvn clean install --file code/
 Once the project is compiled, run the command:
 
 ```
-java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.2.0-SNAPSHOT.jar 
+java -jar code/wsc-calculator.jar 
 ```
 
 # Design overview
@@ -40,6 +40,7 @@ java -jar code/wsc-Calculator-boot/target/wsc-Calculator-boot-0.2.0-SNAPSHOT.jar
 * **jackson-databind-nullable**: wrapper that allows the distinction between null and "null" on the rest implementation
 * **lombok**: library that provides annotations to reduce boilerplate code
 * **mapstructs**: library that provides simple mappings between two classes. Useful when converting elements from one layer to another
+* **maven-jar-plugin**: added to override the location of the built jar for convenience
 * **openapi-generator-maven-plugin**: Plugin chosen to create the rest api code from the OpenApi specification
 * **spring-boot-devtools**: Spring devtools to speed up development
 * **spring-boot-starter-test**: Spring starter for testing
