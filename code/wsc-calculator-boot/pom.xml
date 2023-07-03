@@ -14,6 +14,10 @@
     <name>wsc Calculator boot</name>
     <description>Boot module for the wsc-Calculator. Contains the configuration and the main</description>
 
+    <properties>
+        <external-libs-location>${project.parent.basedir}/../libs/</external-libs-location>
+    </properties>
+
     <dependencies>
         <!-- Modules -->
         <dependency>

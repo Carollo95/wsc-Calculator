@@ -14,6 +14,10 @@
     <name>wsc Calculator business</name>
     <description>Module that contains the business logic of the application</description>
 
+    <properties>
+        <external-libs-location>${project.parent.basedir}/../libs/</external-libs-location>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
