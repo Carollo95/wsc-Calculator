@@ -21,12 +21,8 @@ public class SumOperatorStrategy implements OperatorStrategy {
     public BigDecimal operate(List<BigDecimal> operands) {
         Objects.requireNonNull(operands, "The operands must not be null");
 
-        BigDecimal result = BigDecimal.ZERO;
-
-        for (BigDecimal operand : operands) {
-            result = result.add(operand);
-        }
-
-        return result;
+        return operands
+                .stream()
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

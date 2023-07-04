@@ -28,7 +28,8 @@ public class OperatorStrategyFactory {
         OperatorStrategy result;
         switch (operator) {
             case SUM -> result = new SumOperatorStrategy();
-            default -> throw new IllegalArgumentException("The operation {} is not implemented".formatted(operator));
+            case SUBTRACT -> result = new SubtractOperatorStrategy();
+            default -> throw new IllegalArgumentException("The operation %s is not implemented".formatted(operator));
         }
         return result;
     }

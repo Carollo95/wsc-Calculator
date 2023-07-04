@@ -27,9 +27,15 @@ class OPERATORTest {
         }
 
         @Test
-        void when_existingValue_then_TheCorrespondingValue() {
+        void when_sum_then_SUM() {
             final OPERATOR actual = OPERATOR.fromValue("sum");
             assertEquals(OPERATOR.SUM, actual);
+        }
+
+        @Test
+        void when_subtract_then_TheCorrespondingValue() {
+            final OPERATOR actual = OPERATOR.fromValue("subtract");
+            assertEquals(OPERATOR.SUBTRACT, actual);
         }
 
         @Test

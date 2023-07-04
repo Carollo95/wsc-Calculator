@@ -25,11 +25,13 @@
     <description>Calculator microservice</description>
 
     <properties>
-        <revision>0.1.0</revision>
+        <revision>1.0.0</revision>
 
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <external-libs-location>${project.basedir}/../libs/</external-libs-location>
 
         <!-- Dependency versions -->
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
@@ -38,8 +40,10 @@
         <lombok.version>1.18.28</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-install-plugin.version>2.5.1</maven-install-plugin.version>
         <openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.0.0</springdoc-openapi-starter-webmvc-ui.version>
+        <tracer.version>1.0.0</tracer.version>
     </properties>
 
     <dependencyManagement>
@@ -97,11 +101,18 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.corp.calculator</groupId>
+                <artifactId>tracer</artifactId>
+                <version>${tracer.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
 
     <build>
+        <finalName>wsc-calculator</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -119,7 +130,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
+                <configuration>
+                    <groupId>io.corp.calculator</groupId>
+                    <artifactId>tracer</artifactId>
+                    <version>${tracer.version}</version>
+                    <packaging>jar</packaging>
+                    <file>${external-libs-location}/tracer/tracer-${tracer.version}.jar</file>
+                    <generatePom>true</generatePom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-jar-lib</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
                 <plugin>
