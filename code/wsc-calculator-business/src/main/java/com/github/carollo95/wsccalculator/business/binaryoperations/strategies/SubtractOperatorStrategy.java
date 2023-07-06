@@ -5,6 +5,9 @@
 
 package com.github.carollo95.wsccalculator.business.binaryoperations.strategies;
 
+import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +15,16 @@ import java.util.Objects;
 /**
  * Operation strategy for the SUBTRACTION
  */
-public class SubtractOperatorStrategy implements OperatorStrategy {
+@Component
+public class SubtractOperatorStrategy extends AbstractOperatorStrategy {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected OPERATOR getOperator() {
+        return OPERATOR.SUBTRACT;
+    }
 
     /**
      * {@inheritDoc}
@@ -28,8 +40,9 @@ public class SubtractOperatorStrategy implements OperatorStrategy {
 
     private static void validateOperands(List<BigDecimal> operands) {
         Objects.requireNonNull(operands, "The operands must not be null");
-        if (operands.size() < 1) {
+        if (operands.isEmpty()) {
             throw new IllegalArgumentException("The list of operands can not be empty for subtraction");
         }
     }
+
 }

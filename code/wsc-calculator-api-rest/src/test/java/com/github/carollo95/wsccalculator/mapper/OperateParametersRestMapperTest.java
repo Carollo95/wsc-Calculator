@@ -6,14 +6,13 @@
 package com.github.carollo95.wsccalculator.mapper;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
-import com.github.carollo95.wsccalculator.restdto.OperateParametersRestDTO;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class OperateParametersRestMapperTest {
@@ -30,8 +29,8 @@ class OperateParametersRestMapperTest {
         }
 
         @Test
-        void when_SUM_then_SUM(){
-            OPERATOR actual = target.toBean(OperateParametersRestDTO.OperatorEnum.SUM);
+        void when_sum_then_SUM(){
+            OPERATOR actual = target.toBean("sum");
             assertEquals(OPERATOR.SUM, actual);
         }
     }

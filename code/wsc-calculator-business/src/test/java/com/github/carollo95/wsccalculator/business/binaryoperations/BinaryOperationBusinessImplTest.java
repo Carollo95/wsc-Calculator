@@ -6,9 +6,10 @@
 package com.github.carollo95.wsccalculator.business.binaryoperations;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
-import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
+import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.factory.OperatorStrategyFactory;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +20,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,7 +43,31 @@ class BinaryOperationBusinessImplTest {
 
         @Test
         void when_OperatorIsNull_then_NullPointerException() {
-            OperateParametersBean params = OperateParametersBean.builder().build();
+            final List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operands(operands)
+                    .build();
+
+            assertThrows(NullPointerException.class, () -> target.operateBinary(params));
+        }
+
+        @Test
+        void when_OperatorIsUNDEFINED_then_IllegalArgumentException() {
+            final List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operator(OPERATOR.UNDEFINED)
+                    .operands(operands)
+                    .build();
+
+            assertThrows(IllegalArgumentException.class, () -> target.operateBinary(params));
+        }
+
+        @Test
+        void when_OperandsIsNull_then_NullPointerException() {
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operator(OPERATOR.SUM)
+                    .build();
+
             assertThrows(NullPointerException.class, () -> target.operateBinary(params));
         }
 
@@ -49,17 +75,21 @@ class BinaryOperationBusinessImplTest {
         void when_OperatorIsNotNull_then_DelegatesOnTheStrategy() {
             List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
             final OperateParametersBean params = OperateParametersBean.builder()
-                    .operator(OPERATOR.UNDEFINED)
+                    .operator(OPERATOR.SUM)
                     .operands(operands)
                     .build();
-            BigDecimal expected = new BigDecimal("33.3");
+            BigDecimal expectedValue = new BigDecimal("33.3");
 
             OperatorStrategy operatorStrategyMock = mock(OperatorStrategy.class);
-            when(operatorStrategyMock.operate(operands)).thenReturn(expected);
+            when(operatorStrategyMock.operate(operands)).thenReturn(expectedValue);
 
-            when(operatorStrategyFactory.getStrategy(OPERATOR.UNDEFINED)).thenReturn(operatorStrategyMock);
+            when(operatorStrategyFactory.getStrategy(OPERATOR.SUM)).thenReturn(operatorStrategyMock);
 
-            BigDecimal actual = target.operateBinary(params);
+            final OperateResultBean actual = target.operateBinary(params);
+
+            final OperateResultBean expected = OperateResultBean.builder()
+                    .result(expectedValue)
+                    .build();
 
             assertEquals(expected, actual);
         }

@@ -5,30 +5,25 @@
 
 package com.github.carollo95.wsccalculator.business.binaryoperations.beans;
 
-import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
 
 
 /**
- * Parameters for the performance of binary operations
+ * Result for the performance of binary operations
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
-public class OperateParametersBean {
+public class OperateResultBean {
 
-    private OPERATOR operator;
+    private BigDecimal result;
 
-    @Builder.Default
-    private List<BigDecimal> operands = new ArrayList<>();
 }
