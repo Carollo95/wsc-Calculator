@@ -15,15 +15,16 @@
 
 package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
+import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateResultMapper;
 import com.github.carollo95.wsccalculator.business.binaryoperations.BinaryOperationBusiness;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
-import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
-import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 
 /**
@@ -33,19 +34,22 @@ import java.math.BigDecimal;
 public class BinaryOperationsServiceImpl implements BinaryOperationsService {
 
     @Autowired
-    private OperateParametersMapper operateParametersMapper;
+    private BinaryOperationBusiness binaryOperationBusiness;
 
     @Autowired
-    private BinaryOperationBusiness binaryOperationBusiness;
+    private OperateParametersMapper operateParametersMapper;
+    @Autowired
+    private OperateResultMapper operateResultMapper;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal operateBinary(OperateParametersDTO operateParameters) {
+    public OperateResultDTO operateBinary(OperateParametersDTO operateParameters) {
         validateOperator(operateParameters);
         final OperateParametersBean businessParams = this.operateParametersMapper.dtoToBean(operateParameters);
-        return this.binaryOperationBusiness.operateBinary(businessParams);
+        OperateResultBean businessResponse = this.binaryOperationBusiness.operateBinary(businessParams);
+        return this.operateResultMapper.beanToDto(businessResponse);
     }
 
     private void validateOperator(OperateParametersDTO operateParameters) {

@@ -6,16 +6,17 @@
 package com.github.carollo95.wsccalculator.controller;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
 import com.github.carollo95.wsccalculator.mapper.OperateParametersRestMapper;
+import com.github.carollo95.wsccalculator.mapper.OperateResultRestMapper;
 import com.github.carollo95.wsccalculator.restdto.OperateParametersRestDTO;
+import com.github.carollo95.wsccalculator.restdto.OperateResultRestDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.service.BinaryOperationsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.math.BigDecimal;
 
 /**
  * Controller for the BinaryApi specification
@@ -25,19 +26,22 @@ import java.math.BigDecimal;
 public class BinaryApiImpl implements com.github.carollo95.wsccalculator.controller.BinaryApi {
 
     @Autowired
-    private OperateParametersRestMapper operateParametersMapper;
+    private BinaryOperationsService binaryOperationsService;
 
     @Autowired
-    private BinaryOperationsService binaryOperationsService;
+    private OperateParametersRestMapper operateParametersMapper;
+    @Autowired
+    private OperateResultRestMapper operateResultMapper;
 
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<BigDecimal> operateBinary(final @Valid OperateParametersRestDTO operateParametersRestDTO) {
+    public ResponseEntity<OperateResultRestDTO> operateBinary(final @Valid OperateParametersRestDTO operateParametersRestDTO) {
         final OperateParametersDTO operateParametersDTO = this.operateParametersMapper.restDtoToDTO(operateParametersRestDTO);
-        final BigDecimal serviceResponse = this.binaryOperationsService.operateBinary(operateParametersDTO);
-        return ResponseEntity.ok(serviceResponse);
+        final OperateResultDTO serviceResponse = this.binaryOperationsService.operateBinary(operateParametersDTO);
+        final OperateResultRestDTO response = this.operateResultMapper.dtoToRestDTO(serviceResponse);
+        return ResponseEntity.ok(response);
     }
 }

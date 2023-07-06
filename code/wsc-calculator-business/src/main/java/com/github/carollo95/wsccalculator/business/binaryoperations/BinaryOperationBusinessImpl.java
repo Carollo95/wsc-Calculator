@@ -6,6 +6,7 @@
 package com.github.carollo95.wsccalculator.business.binaryoperations;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,15 @@ public class BinaryOperationBusinessImpl implements BinaryOperationBusiness {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal operateBinary(final OperateParametersBean operateParameters) {
+    public OperateResultBean operateBinary(final OperateParametersBean operateParameters) {
         validateInputParams(operateParameters);
+
         final OperatorStrategy operatorStrategy = this.operatorStrategyFactory.getStrategy(operateParameters.getOperator());
-        return operatorStrategy.operate(operateParameters.getOperands());
+        BigDecimal resultValue = operatorStrategy.operate(operateParameters.getOperands());
+
+        return OperateResultBean.builder()
+                .value(resultValue)
+                .build();
     }
 
     private static void validateInputParams(final OperateParametersBean operateParameters) {

@@ -16,8 +16,7 @@
 package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
-
-import java.math.BigDecimal;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
 
 /**
  * Service layer faro the binary operations
@@ -29,6 +28,6 @@ public interface BinaryOperationsService {
      * @param operateParameters the parameters to operate on
      * @return the result of the operation
      */
-    BigDecimal operateBinary(final OperateParametersDTO operateParameters);
+    OperateResultDTO operateBinary(final OperateParametersDTO operateParameters);
 
 }

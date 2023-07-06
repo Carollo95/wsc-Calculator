@@ -9,7 +9,7 @@ info:
   license:
     name: GNU General Public license 3.0
     url: https://www.gnu.org/licenses/gpl-3.0.html
-  version: 2.0.0
+  version: 1.1.0
 servers:
   - url: https://localhost:8080/calculator/api/v1
 tags:
@@ -36,17 +36,25 @@ paths:
           content:
             application/json:
               schema:
-                format: double
-                type: number
-              examples:
-                resultExample:
-                  value: '53.46'
+                $ref: '#/components/schemas/OperateResult'
         '400':
           description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
         '405':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
 
 components:
   schemas:
@@ -70,3 +78,24 @@ components:
           minItems: 2
           maxItems: 2
           example: "[10.21, 55.4]"
+    OperateResult:
+      description: the result of an operation
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          description: the value of the result
+          format: double
+          type: number
+          example: "65.51"
+    ErrorInformation:
+      description: container of information in the case on an error
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          description: The information of the problem
+          type: string
+          example: "Some of the parameters are not valid"

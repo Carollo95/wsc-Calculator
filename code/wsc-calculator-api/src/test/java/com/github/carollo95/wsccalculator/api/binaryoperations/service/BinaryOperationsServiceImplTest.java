@@ -11,17 +11,18 @@
 package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
+import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateResultMapper;
 import com.github.carollo95.wsccalculator.business.binaryoperations.BinaryOperationBusiness;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -34,6 +35,8 @@ class BinaryOperationsServiceImplTest {
 
     @Mock
     private OperateParametersMapper operateParametersMapper;
+    @Mock
+    private OperateResultMapper operateResultMapper;
 
     @Mock
     private BinaryOperationBusiness binaryOperationBusiness;
@@ -47,10 +50,13 @@ class BinaryOperationsServiceImplTest {
 
             final OperateParametersBean businessParams = new OperateParametersBean();
             when(operateParametersMapper.dtoToBean(params)).thenReturn(businessParams);
-            when(binaryOperationBusiness.operateBinary(businessParams)).thenReturn(BigDecimal.ONE);
+            final OperateResultBean businessResult = new OperateResultBean();
+            when(binaryOperationBusiness.operateBinary(businessParams)).thenReturn(businessResult);
+            final OperateResultDTO result = new OperateResultDTO();
+            when(operateResultMapper.beanToDto(businessResult)).thenReturn(result);
 
-            final BigDecimal actual = target.operateBinary(params);
-            assertEquals(BigDecimal.ONE, actual);
+            final OperateResultDTO actual = target.operateBinary(params);
+            assertEquals(result, actual);
         }
     }
 

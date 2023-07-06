@@ -19,6 +19,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.github.carollo95.wsccalculator.restdto.ErrorInformationRestDTO;
+
 /**
  * Advice that captures all the exceptions thrown from the Controller layer and properly returns the appropriate response.
  */
@@ -43,8 +45,9 @@ public class ControllerExceptionHandler {
             HttpMediaTypeNotSupportedException.class,
             HttpMediaTypeNotAcceptableException.class
     })
-    private ResponseEntity<String> badParametersHandler(final Exception e) {
-        return ResponseEntity.badRequest().body("The parameters are not valid");
+    private ResponseEntity<ErrorInformationRestDTO> badParametersHandler(final Exception e) {
+        final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("The parameters are not valid");
+        return ResponseEntity.badRequest().body(errorInfo);
     }
 
     /**
@@ -53,8 +56,9 @@ public class ControllerExceptionHandler {
      * @return the response with the exception message
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    private ResponseEntity<String> operationNotValidHandler(final Exception e) {
-        return ResponseEntity.status(HttpStatusCode.valueOf(405)).body("The operation is not valid");
+    private ResponseEntity<ErrorInformationRestDTO> operationNotValidHandler(final Exception e) {
+        final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("The operation is not valid");
+        return ResponseEntity.status(HttpStatusCode.valueOf(405)).body(errorInfo);
     }
 
     /**
@@ -64,10 +68,10 @@ public class ControllerExceptionHandler {
      * @return an error response entity
      */
     @ExceptionHandler
-    private ResponseEntity<String> genericExceptionHandler(final Exception e) {
+    private ResponseEntity<ErrorInformationRestDTO> genericExceptionHandler(final Exception e) {
         log.error(ExceptionUtils.getStackTrace(e));
-        return new ResponseEntity<>("An internal error occurred. Please contact the administrator",
-                HttpStatus.INTERNAL_SERVER_ERROR);
+        final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("An internal error occurred. Please contact the administrator");
+        return new ResponseEntity<>(errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

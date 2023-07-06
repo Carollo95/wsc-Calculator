@@ -6,6 +6,7 @@
 package com.github.carollo95.wsccalculator.business.binaryoperations;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
@@ -59,6 +60,7 @@ class BinaryOperationBusinessImplTest {
 
             assertThrows(IllegalArgumentException.class, () -> target.operateBinary(params));
         }
+
         @Test
         void when_OperandsIsNull_then_NullPointerException() {
             final OperateParametersBean params = OperateParametersBean.builder()
@@ -75,14 +77,18 @@ class BinaryOperationBusinessImplTest {
                     .operator(OPERATOR.SUM)
                     .operands(operands)
                     .build();
-            BigDecimal expected = new BigDecimal("33.3");
+            BigDecimal expectedValue = new BigDecimal("33.3");
 
             OperatorStrategy operatorStrategyMock = mock(OperatorStrategy.class);
-            when(operatorStrategyMock.operate(operands)).thenReturn(expected);
+            when(operatorStrategyMock.operate(operands)).thenReturn(expectedValue);
 
             when(operatorStrategyFactory.getStrategy(OPERATOR.SUM)).thenReturn(operatorStrategyMock);
 
-            BigDecimal actual = target.operateBinary(params);
+            final OperateResultBean actual = target.operateBinary(params);
+
+            final OperateResultBean expected = OperateResultBean.builder()
+                    .value(expectedValue)
+                    .build();
 
             assertEquals(expected, actual);
         }
