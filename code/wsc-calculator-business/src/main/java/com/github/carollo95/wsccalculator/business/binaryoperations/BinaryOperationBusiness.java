@@ -3,21 +3,10 @@
  *  See file LICENSE file for full license details.
  */
 
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
 package com.github.carollo95.wsccalculator.business.binaryoperations;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
-
-import java.math.BigDecimal;
+import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 
 /**
  * Business logic for binary operations
@@ -28,5 +17,5 @@ public interface BinaryOperationBusiness {
      * @param operateParameters the parameters to operate on
      * @return the result of the operation
      */
-    BigDecimal operateBinary(final OperateParametersBean operateParameters);
+    OperateResultBean operateBinary(final OperateParametersBean operateParameters);
 }

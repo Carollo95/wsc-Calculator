@@ -9,13 +9,36 @@ info:
   license:
     name: GNU General Public license 3.0
     url: https://www.gnu.org/licenses/gpl-3.0.html
-  version: 1.0.0
+  version: 2.0.0
 servers:
   - url: https://localhost:8080/calculator/api/v1
 tags:
   - name: Binary
     description: Collection of binary operations
 paths:
+  /operators:
+    get:
+      tags:
+        - Binary
+      summary: Returns the list of all the possible operators for binary operations
+      description: Returns the list of all the possible operators for binary operations
+      operationId: getOperators
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: The list of possible operators for binary operations
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operator'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
   /operate:
     post:
       tags:
@@ -24,7 +47,7 @@ paths:
       description: Performs the selected operation on the given arguments
       operationId: operateBinary
       requestBody:
-        description: Update an existent pet in the store
+        description: Parameters for the binary operation
         content:
           application/json:
             schema:
@@ -36,20 +59,47 @@ paths:
           content:
             application/json:
               schema:
-                format: double
-                type: number
-              examples:
-                resultExample:
-                  value: '53.46'
+                $ref: '#/components/schemas/OperateResult'
         '400':
           description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
         '405':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
 
 components:
   schemas:
+    ErrorInformation:
+      description: container of information in the case on an error
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          description: The information of the problem
+          type: string
+          example: "Some of the parameters are not valid"
+    Operator:
+      description: an operator for arithmetic operations
+      required:
+        - name
+      properties:
+        name:
+          description: the name of the operator
+          type: string
+          example: "sum"
     OperateParameters:
       description: the parameters to perform an operation
       required:
@@ -58,11 +108,8 @@ components:
       type: object
       properties:
         operator:
-          description: the operator to use
+          description: the name of the operator to use
           type: string
-          enum:
-            - sum
-            - subtract
           example: "sum"
         operands:
           description: The operands to operate
@@ -73,3 +120,14 @@ components:
           minItems: 2
           maxItems: 2
           example: "[10.21, 55.4]"
+    OperateResult:
+      description: the result of an operation
+      required:
+        - result
+      type: object
+      properties:
+        result:
+          description: the value of the result
+          format: double
+          type: number
+          example: "65.51"

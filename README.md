@@ -53,6 +53,12 @@ java -jar code/wsc-calculator-boot/target/wsc-calculator.jar
 Swagger Url http://localhost:8080/calculator/api/v1/swagger-ui/index.html
 
 ## Operate endpoint:
+**/calculator/api/v1/operators**
+Example:
+```
+curl -X GET http://localhost:8080/calculator/api/v1/operators -H "accept: application/json"
+```
+
 
 **/calculator/api/v1/operate:**
 Example:
@@ -60,7 +66,5 @@ Example:
 curl -X POST http://localhost:8080/calculator/api/v1/operate -H "accept: application/json" -H "Content-Type: application/json"  -d "{""operator"": ""sum"", ""operands"": [10.21, 55.4 ]}"
 ```
 
-The "operator" field can be "sum" or "subtract", depending on the desired operation.
+The "operator" field is the 'name' field from any of the operators from the '/calculator/api/v1/operators'
 The "operands" field must be a list of two elements.
-
- 

@@ -5,6 +5,9 @@
 
 package com.github.carollo95.wsccalculator.business.binaryoperations.strategies;
 
+import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +15,16 @@ import java.util.Objects;
 /**
  * Operation strategy for the SUM
  */
-public class SumOperatorStrategy implements OperatorStrategy {
+@Component
+public class SumOperatorStrategy extends AbstractOperatorStrategy {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected OPERATOR getOperator() {
+        return OPERATOR.SUM;
+    }
 
     /**
      * {@inheritDoc}

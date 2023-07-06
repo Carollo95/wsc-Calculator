@@ -5,19 +5,42 @@
 
 package com.github.carollo95.wsccalculator.business.binaryoperations.strategies;
 
+import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
+import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.factory.OperatorStrategyFactory;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class SumOperatorStrategyTest {
 
-    private final SumOperatorStrategy target = new SumOperatorStrategy();
+    @InjectMocks
+    private SumOperatorStrategy target;
 
+    @Mock
+    private OperatorStrategyFactory operatorStrategyFactory;
+
+
+    @Nested
+    class Register {
+
+        @Test
+        void when_Called_TheBeanIsRegisteredForSum() {
+            target.register();
+            verify(operatorStrategyFactory).registerStrategy(OPERATOR.SUM, target);
+        }
+
+    }
     @Nested
     class Operate {
 

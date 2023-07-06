@@ -3,15 +3,14 @@
  *  See file LICENSE file for full license details.
  */
 
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
 package com.github.carollo95.wsccalculator.business.binaryoperations.enums;
 
 
 import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Collection of the operations that can be performed by the calculator
@@ -22,27 +21,38 @@ public enum OPERATOR {
     SUM("sum"),
     SUBTRACT("subtract");
 
-    private final String value;
+    private final String name;
 
-    OPERATOR(final String value) {
-        this.value = value;
+    OPERATOR(final String name) {
+        this.name = name;
     }
 
 
     /**
-     * Gets the operator from the value.
-     * @param value the value
+     * Gets the operator from the name.
+     *
+     * @param name the name
      * @return the operator or the UNDEFINED operator if it doesn't match with any
      */
-    public static OPERATOR fromValue(String value){
-        OPERATOR restul = UNDEFINED;
+    public static OPERATOR fromName(String name) {
+        OPERATOR result = UNDEFINED;
         for (OPERATOR operator : values()) {
-            if(operator.value.equals(value)){
-                restul = operator;
+            if (operator.name.equals(name)) {
+                result = operator;
                 break;
             }
         }
 
-        return restul;
+        return result;
+    }
+
+    /**
+     * Returns the list of valid operators
+     * @return the list of valid operators
+     */
+    public static List<OPERATOR> getValidOperators() {
+        return Arrays.stream(OPERATOR.values())
+                .filter(o -> !UNDEFINED.equals(o))
+                .collect(Collectors.toList());
     }
 }
