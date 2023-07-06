@@ -28,7 +28,7 @@ public class SubtractOperatorStrategy implements OperatorStrategy {
 
     private static void validateOperands(List<BigDecimal> operands) {
         Objects.requireNonNull(operands, "The operands must not be null");
-        if (operands.size() < 1) {
+        if (operands.isEmpty()) {
             throw new IllegalArgumentException("The list of operands can not be empty for subtraction");
         }
     }
