@@ -88,7 +88,7 @@ class BinaryOperationBusinessImplTest {
             final OperateResultBean actual = target.operateBinary(params);
 
             final OperateResultBean expected = OperateResultBean.builder()
-                    .value(expectedValue)
+                    .result(expectedValue)
                     .build();
 
             assertEquals(expected, actual);

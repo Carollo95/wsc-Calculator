@@ -16,6 +16,29 @@ tags:
   - name: Binary
     description: Collection of binary operations
 paths:
+  /operators:
+    get:
+      tags:
+        - Binary
+      summary: Returns the list of all the possible operators for binary operations
+      description: Returns the list of all the possible operators for binary operations
+      operationId: getOperators
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: The list of possible operators for binary operations
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operator'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInformation'
   /operate:
     post:
       tags:
@@ -58,6 +81,15 @@ paths:
 
 components:
   schemas:
+    Operator:
+      description: an operator for arithmetic operations
+      required:
+        - name
+      properties:
+        name:
+          description: the name of the operator
+          type: string
+          example: "sum"
     OperateParameters:
       description: the parameters to perform an operation
       required:
@@ -66,7 +98,7 @@ components:
       type: object
       properties:
         operator:
-          description: the operator to use
+          description: the name of the operator to use
           type: string
           example: "sum"
         operands:
@@ -81,10 +113,10 @@ components:
     OperateResult:
       description: the result of an operation
       required:
-        - value
+        - result
       type: object
       properties:
-        value:
+        result:
           description: the value of the result
           format: double
           type: number

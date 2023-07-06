@@ -19,7 +19,7 @@ public interface OperateParametersRestMapper {
     OperateParametersDTO restDtoToDTO(OperateParametersRestDTO restDTO);
 
     default OPERATOR toBean(final String operator) {
-        return OPERATOR.fromValue(operator);
+        return OPERATOR.fromName(operator);
     }
 
 }

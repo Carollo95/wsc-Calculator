@@ -17,14 +17,18 @@ package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperatorDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateResultMapper;
+import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperatorMapper;
 import com.github.carollo95.wsccalculator.business.binaryoperations.BinaryOperationBusiness;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -40,6 +44,17 @@ public class BinaryOperationsServiceImpl implements BinaryOperationsService {
     private OperateParametersMapper operateParametersMapper;
     @Autowired
     private OperateResultMapper operateResultMapper;
+    @Autowired
+    private OperatorMapper operatorMapper;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OperatorDTO> getBinaryOperators() {
+        final List<OPERATOR> validOperators = OPERATOR.getValidOperators();
+        return this.operatorMapper.enumListToDto(validOperators);
+    }
 
     /**
      * {@inheritDoc}

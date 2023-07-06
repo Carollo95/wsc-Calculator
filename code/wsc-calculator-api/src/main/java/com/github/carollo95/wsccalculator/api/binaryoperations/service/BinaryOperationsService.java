@@ -17,6 +17,9 @@ package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperatorDTO;
+
+import java.util.List;
 
 /**
  * Service layer faro the binary operations
@@ -29,5 +32,11 @@ public interface BinaryOperationsService {
      * @return the result of the operation
      */
     OperateResultDTO operateBinary(final OperateParametersDTO operateParameters);
+
+    /**
+     * Gets the list of all the binary operators
+     * @return the list of all the binary operators
+     */
+    List<OperatorDTO> getBinaryOperators();
 
 }

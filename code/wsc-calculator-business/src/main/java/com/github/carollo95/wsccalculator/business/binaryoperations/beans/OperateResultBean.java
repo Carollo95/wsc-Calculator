@@ -34,6 +34,6 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor(access = PRIVATE)
 public class OperateResultBean {
 
-    private BigDecimal value;
+    private BigDecimal result;
 
 }

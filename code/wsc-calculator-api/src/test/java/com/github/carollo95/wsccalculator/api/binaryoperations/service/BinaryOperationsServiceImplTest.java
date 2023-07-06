@@ -12,8 +12,10 @@ package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateResultDTO;
+import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperatorDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateResultMapper;
+import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperatorMapper;
 import com.github.carollo95.wsccalculator.business.binaryoperations.BinaryOperationBusiness;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
@@ -25,8 +27,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,6 +48,22 @@ class BinaryOperationsServiceImplTest {
 
     @Mock
     private BinaryOperationBusiness binaryOperationBusiness;
+    @Mock
+    private OperatorMapper operatorMapper;
+
+    @Nested
+    class GetBinaryOperators{
+
+        @Test
+        void when_called_then_TheListOfOperators(){
+            List<OperatorDTO> result = new ArrayList<>();
+            when(operatorMapper.enumListToDto(any())).thenReturn(result);
+
+            List<OperatorDTO> actual = target.getBinaryOperators();
+            assertEquals(result, actual);
+        }
+
+    }
 
     @Nested
     class OperateBinary {

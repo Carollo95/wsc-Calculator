@@ -37,7 +37,7 @@ public class BinaryOperationBusinessImpl implements BinaryOperationBusiness {
         BigDecimal resultValue = operatorStrategy.operate(operateParameters.getOperands());
 
         return OperateResultBean.builder()
-                .value(resultValue)
+                .result(resultValue)
                 .build();
     }
 
