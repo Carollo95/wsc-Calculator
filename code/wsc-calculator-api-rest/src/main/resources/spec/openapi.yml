@@ -81,6 +81,16 @@ paths:
 
 components:
   schemas:
+    ErrorInformation:
+      description: container of information in the case on an error
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          description: The information of the problem
+          type: string
+          example: "Some of the parameters are not valid"
     Operator:
       description: an operator for arithmetic operations
       required:
@@ -121,13 +131,3 @@ components:
           format: double
           type: number
           example: "65.51"
-    ErrorInformation:
-      description: container of information in the case on an error
-      required:
-        - message
-      type: object
-      properties:
-        message:
-          description: The information of the problem
-          type: string
-          example: "Some of the parameters are not valid"
