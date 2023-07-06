@@ -41,7 +41,30 @@ class BinaryOperationBusinessImplTest {
 
         @Test
         void when_OperatorIsNull_then_NullPointerException() {
-            OperateParametersBean params = OperateParametersBean.builder().build();
+            final List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operands(operands)
+                    .build();
+
+            assertThrows(NullPointerException.class, () -> target.operateBinary(params));
+        }
+
+        @Test
+        void when_OperatorIsUNDEFINED_then_IllegalArgumentException() {
+            final List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operator(OPERATOR.UNDEFINED)
+                    .operands(operands)
+                    .build();
+
+            assertThrows(IllegalArgumentException.class, () -> target.operateBinary(params));
+        }
+        @Test
+        void when_OperandsIsNull_then_NullPointerException() {
+            final OperateParametersBean params = OperateParametersBean.builder()
+                    .operator(OPERATOR.SUM)
+                    .build();
+
             assertThrows(NullPointerException.class, () -> target.operateBinary(params));
         }
 
@@ -49,7 +72,7 @@ class BinaryOperationBusinessImplTest {
         void when_OperatorIsNotNull_then_DelegatesOnTheStrategy() {
             List<BigDecimal> operands = List.of(new BigDecimal("12.1"), new BigDecimal("21.2"));
             final OperateParametersBean params = OperateParametersBean.builder()
-                    .operator(OPERATOR.UNDEFINED)
+                    .operator(OPERATOR.SUM)
                     .operands(operands)
                     .build();
             BigDecimal expected = new BigDecimal("33.3");
@@ -57,7 +80,7 @@ class BinaryOperationBusinessImplTest {
             OperatorStrategy operatorStrategyMock = mock(OperatorStrategy.class);
             when(operatorStrategyMock.operate(operands)).thenReturn(expected);
 
-            when(operatorStrategyFactory.getStrategy(OPERATOR.UNDEFINED)).thenReturn(operatorStrategyMock);
+            when(operatorStrategyFactory.getStrategy(OPERATOR.SUM)).thenReturn(operatorStrategyMock);
 
             BigDecimal actual = target.operateBinary(params);
 

@@ -9,7 +9,7 @@ info:
   license:
     name: GNU General Public license 3.0
     url: https://www.gnu.org/licenses/gpl-3.0.html
-  version: 1.1.0
+  version: 2.0.0
 servers:
   - url: https://localhost:8080/calculator/api/v1
 tags:
@@ -60,9 +60,6 @@ components:
         operator:
           description: the operator to use
           type: string
-          enum:
-            - sum
-            - subtract
           example: "sum"
         operands:
           description: The operands to operate

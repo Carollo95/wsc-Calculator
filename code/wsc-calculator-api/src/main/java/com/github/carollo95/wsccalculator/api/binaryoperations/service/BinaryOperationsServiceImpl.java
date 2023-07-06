@@ -19,6 +19,7 @@ import com.github.carollo95.wsccalculator.business.binaryoperations.BinaryOperat
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
 import com.github.carollo95.wsccalculator.api.binaryoperations.mapper.OperateParametersMapper;
+import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,15 @@ public class BinaryOperationsServiceImpl implements BinaryOperationsService {
      */
     @Override
     public BigDecimal operateBinary(OperateParametersDTO operateParameters) {
+        validateOperator(operateParameters);
         final OperateParametersBean businessParams = this.operateParametersMapper.dtoToBean(operateParameters);
         return this.binaryOperationBusiness.operateBinary(businessParams);
+    }
+
+    private void validateOperator(OperateParametersDTO operateParameters) {
+        if(operateParameters == null || OPERATOR.UNDEFINED.equals(operateParameters.getOperator())){
+            throw new ServiceInputValidationException("The operator is not valid");
+        }
     }
 
 }

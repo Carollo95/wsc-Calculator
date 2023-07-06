@@ -35,14 +35,14 @@ public enum OPERATOR {
      * @return the operator or the UNDEFINED operator if it doesn't match with any
      */
     public static OPERATOR fromValue(String value){
-        OPERATOR restul = UNDEFINED;
+        OPERATOR result = UNDEFINED;
         for (OPERATOR operator : values()) {
             if(operator.value.equals(value)){
-                restul = operator;
+                result = operator;
                 break;
             }
         }
 
-        return restul;
+        return result;
     }
 }

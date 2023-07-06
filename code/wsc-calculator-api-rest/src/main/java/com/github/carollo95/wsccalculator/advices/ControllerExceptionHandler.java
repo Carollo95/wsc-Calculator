@@ -5,6 +5,7 @@
 
 package com.github.carollo95.wsccalculator.advices;
 
+import com.github.carollo95.wsccalculator.api.binaryoperations.service.ServiceInputValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ public class ControllerExceptionHandler {
      * @return the response with the exception message
      */
     @ExceptionHandler({
+            ServiceInputValidationException.class,
             HttpMessageNotReadableException.class,
             MethodArgumentNotValidException.class,
             HttpMediaTypeNotSupportedException.class,

@@ -18,11 +18,8 @@ public interface OperateParametersRestMapper {
 
     OperateParametersDTO restDtoToDTO(OperateParametersRestDTO restDTO);
 
-    default OPERATOR toBean(OperateParametersRestDTO.OperatorEnum restEnum) {
-        if(restEnum == null){
-            return OPERATOR.UNDEFINED;
-        }
-
-        return OPERATOR.fromValue(restEnum.getValue());
+    default OPERATOR toBean(final String operator) {
+        return OPERATOR.fromValue(operator);
     }
+
 }
