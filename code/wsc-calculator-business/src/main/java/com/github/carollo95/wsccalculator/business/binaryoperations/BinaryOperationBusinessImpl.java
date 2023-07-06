@@ -8,7 +8,7 @@ package com.github.carollo95.wsccalculator.business.binaryoperations;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateParametersBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.beans.OperateResultBean;
 import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategy;
-import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.OperatorStrategyFactory;
+import com.github.carollo95.wsccalculator.business.binaryoperations.strategies.factory.OperatorStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
