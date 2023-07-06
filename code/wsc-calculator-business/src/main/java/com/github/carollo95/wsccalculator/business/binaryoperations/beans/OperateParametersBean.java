@@ -3,16 +3,6 @@
  *  See file LICENSE file for full license details.
  */
 
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
 package com.github.carollo95.wsccalculator.business.binaryoperations.beans;
 
 import com.github.carollo95.wsccalculator.business.binaryoperations.enums.OPERATOR;

@@ -3,16 +3,6 @@
  *  See file LICENSE file for full license details.
  */
 
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
-/*
- *  This file is part of wsc-Calculator.
- *  See file LICENSE file for full license details.
- */
-
 package com.github.carollo95.wsccalculator.api.binaryoperations.service;
 
 import com.github.carollo95.wsccalculator.api.binaryoperations.dto.OperateParametersDTO;
