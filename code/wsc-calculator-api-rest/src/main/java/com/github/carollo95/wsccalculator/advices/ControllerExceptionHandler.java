@@ -45,7 +45,7 @@ public class ControllerExceptionHandler {
             HttpMediaTypeNotSupportedException.class,
             HttpMediaTypeNotAcceptableException.class
     })
-    private ResponseEntity<ErrorInformationRestDTO> badParametersHandler(final Exception e) {
+    public ResponseEntity<ErrorInformationRestDTO> badParametersHandler(final Exception e) {
         final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("The parameters are not valid");
         return ResponseEntity.badRequest().body(errorInfo);
     }
@@ -56,7 +56,7 @@ public class ControllerExceptionHandler {
      * @return the response with the exception message
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    private ResponseEntity<ErrorInformationRestDTO> operationNotValidHandler(final Exception e) {
+    public ResponseEntity<ErrorInformationRestDTO> operationNotValidHandler(final Exception e) {
         final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("The operation is not valid");
         return ResponseEntity.status(HttpStatusCode.valueOf(405)).body(errorInfo);
     }
@@ -68,7 +68,7 @@ public class ControllerExceptionHandler {
      * @return an error response entity
      */
     @ExceptionHandler
-    private ResponseEntity<ErrorInformationRestDTO> genericExceptionHandler(final Exception e) {
+    public ResponseEntity<ErrorInformationRestDTO> genericExceptionHandler(final Exception e) {
         log.error(ExceptionUtils.getStackTrace(e));
         final ErrorInformationRestDTO errorInfo = new ErrorInformationRestDTO("An internal error occurred. Please contact the administrator");
         return new ResponseEntity<>(errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -19,6 +19,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.context.request.NativeWebRequest;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -35,6 +38,17 @@ class BinaryApiImplTest {
     private OperateResultRestMapper operateResultMapper;
     @Mock
     private BinaryOperationsService binaryOperationsService;
+
+    @Nested
+    class GetRequest{
+
+        @Test
+        void when_called_then_EmptyOptional(){
+            Optional<NativeWebRequest> actual = target.getRequest();
+            assertEquals(Optional.empty(), actual);
+        }
+
+    }
 
     @Nested
     class OperateBinary {
